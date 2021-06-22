@@ -1,4 +1,4 @@
-import React, { useState, useEffect, createContext , useContext} from 'react';
+import React, { useState, useEffect, createContext , useContext, useReducer } from 'react';
 import mockUser from './mockData.js/mockUser';
 import mockRepos from './mockData.js/mockRepos';
 import mockFollowers from './mockData.js/mockFollowers';

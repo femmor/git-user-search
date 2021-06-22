@@ -3,7 +3,7 @@ import { Info, Repos, User, Search, Navbar } from '../components';
 import { useGithubContext } from '../context/context';
 import loadingImage from '../images/preloader.gif';
 const Dashboard = () => {
-  const {data} = useGithubContext()
+  const data = useGithubContext()
   console.log(data);
 
   return (

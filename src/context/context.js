@@ -10,9 +10,24 @@ const GithubContext = createContext()
 
 export const GithubProvider = ({ children }) => {
   // App Logic and Functionality
+  const [githubUser, setGithubUser] = useState(mockUser)
+  const [repos, setRepos] = useState(mockRepos)
+  const [followers, setFollowers] = useState(mockFollowers)
+
+  // const fetchUser = async () => {
+
+  // }
+
+  // useEffect(() => {
+  //   fetchUser()
+  // }, [])
 
   return (
-    <GithubContext.Provider value="hello">
+    <GithubContext.Provider value={{
+      githubUser,
+      repos,
+      followers
+    }}>
       {children}
     </GithubContext.Provider>
   )

@@ -6,9 +6,7 @@ const Repos = () => {
   const {repos} = useGithubContext()
   console.log(repos);
   return (
-    <Wrapper>
-      Repos
-    </Wrapper>
+    <ExampleChart/>
   )
 };
 

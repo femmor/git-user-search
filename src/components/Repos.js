@@ -4,7 +4,7 @@ import { useGithubContext } from '../context/context';
 import { Pie3D, Column3D, Bar3D, Doughnut2D } from './Charts';
 const Repos = () => {
   const {repos} = useGithubContext()
-  
+
 // Using reduce method to get the % of languages used
   let languages = repos.reduce((total, item) => {
     // Destructure language out of each repo {item} - repo is an object
@@ -53,6 +53,7 @@ const Repos = () => {
     <section className="section">
       <Wrapper className="section-center">
         <Pie3D data={languages}/>
+        <Doughnut2D data={languages}/>
       </Wrapper>
     </section>
   )
@@ -73,6 +74,7 @@ const Wrapper = styled.div`
   div {
     width: 100% !important;
   }
+
   .fusioncharts-container {
     width: 100% !important;
   }

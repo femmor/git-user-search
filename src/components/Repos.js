@@ -5,35 +5,35 @@ import { Pie3D, Column3D, Bar3D, Doughnut2D } from './Charts';
 const Repos = () => {
   const {repos} = useGithubContext()
   
-  // Use reduce method to get the % of Language
+// Using reduce method to get the % of languages used
   let languages = repos.reduce((total, item) => {
-    // Destructure language out of each repo - repo is an object
+    // Destructure language out of each repo {item} - repo is an object
     const {language} = item
-    // check if language is null
+    // check if language is null - return total
     if (!language) {
       // return it
       return total
-    } 
+    }
     // Check if the returned total object has the language property
-    if (!total[language]) {
+    if(!total[language]) {
       // if it does not, create one - total[language]
       total[language] = { label: language, value: 1 }
     } else {
       // if it does, if the language is there, keep the language property, and override the value of the language property
       total[language] = { ...total[language], value: total[language].value + 1 }
     }
-    
-    // return total
+
+    // return total - a must for the reduce method
     return total
   }, {})
-  
+
   // Since we are setting it as an array, we use Object.values() method
   languages = Object.values(languages)
     // Sort it based on highest values first
     .sort((a, b) => b.value - a.value)
     // Get the first 5 values
     .slice(0, 5)
-
+  
   // const chartData = [
   //   {
   //     label: "HTML",

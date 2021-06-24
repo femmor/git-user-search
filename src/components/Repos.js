@@ -6,9 +6,9 @@ const Repos = () => {
   const {repos} = useGithubContext()
 
 // Using reduce method to get the % of languages used
-  let languages = repos.reduce((total, item) => {
+  const languages = repos.reduce((total, item) => {
     // Destructure language out of each repo {item} - repo is an object
-    const {language} = item
+    const {language, stargazers_count} = item
     // check if language is null - return total
     if (!language) {
       // return it
@@ -17,23 +17,39 @@ const Repos = () => {
     // Check if the returned total object has the language property
     if(!total[language]) {
       // if it does not, create one - total[language]
-      total[language] = { label: language, value: 1 }
+      total[language] = { label: language, value: 1, stars: stargazers_count }
     } else {
       // if it does, if the language is there, keep the language property, and override the value of the language property
-      total[language] = { ...total[language], value: total[language].value + 1 }
+      total[language] = { ...total[language], value: total[language].value + 1, stars: total[language].stars + stargazers_count, }
     }
 
     // return total - a must for the reduce method
     return total
   }, {})
 
+
   // Since we are setting it as an array, we use Object.values() method
-  languages = Object.values(languages)
+
+  // Most Used
+  const mostUsed = Object.values(languages)
     // Sort it based on highest values first
     .sort((a, b) => b.value - a.value)
     // Get the first 5 values
     .slice(0, 5)
   
+  // Most stars per language
+
+  // Most Popular
+  const mostPopular = Object.values(languages)
+    .sort((a, b) => b.stars - a.stars)
+    .map((item) => {
+      return { ...item, value: item.stars }
+    })
+    .slice(0, 5)
+
+  console.log(mostPopular);
+  
+
   // const chartData = [
   //   {
   //     label: "HTML",
@@ -52,8 +68,8 @@ const Repos = () => {
   return (
     <section className="section">
       <Wrapper className="section-center">
-        <Pie3D data={languages}/>
-        <Doughnut2D data={languages}/>
+        <Pie3D data={mostUsed}/>
+        <Doughnut2D data={mostPopular}/>
       </Wrapper>
     </section>
   )
